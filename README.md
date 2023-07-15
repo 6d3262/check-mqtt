@@ -1,9 +1,16 @@
-# Zigbee MQTT Message Reception Monitor
+# MQTT Message Monitor
 
-This script is designed to monitor the message reception of Zigbee Router/Repeater devices via the MQTT protocol using the Zigbee2MQTT utility, and send notifications via Telegram. The script can operate in either **'check'** or **'debug'** mode.
+`check_mqtt.py` is a versatile, Python-based monitoring tool designed to examine the message reception of specific devices via the MQTT protocol. This script could prove invaluable in many situations, such as in home automation systems, IoT deployments, or any environment where reliable device communication is paramount.
 
-- In **'check'** mode, the script listens for MQTT messages from the specified devices for a fixed amount of time. If no messages are received in this period, a notification is sent via Telegram.
-- In **'debug'** mode, the script will print out diagnostic information regarding its connection to the MQTT broker and incoming messages.
+The functionality of the script revolves around establishing a connection with an MQTT broker. It uses the broker credentials, along with the specific MQTT topics to be monitored, from a `config.ini` file. After successfully connecting to the MQTT broker, the script subscribes to these topics, which correspond to the devices you are interested in monitoring. It then listens for incoming MQTT messages from these devices.
+
+Here are the two distinct modes of operation that this script offers:
+
+1. **Check mode (-c)**:  In this mode, the script listens for MQTT messages from the specified devices for a predetermined duration. If at least *one* message is received from any of the devices within this period, the check is deemed successful. If not, a notification is triggered and sent via a Telegram bot to alert you to possible communication issues with your devices. Check mode is perfect for regular, automated monitoring, allowing you to set the script to run at specific intervals to perform consistent checks on your device communication.
+
+2. **Debug mode (-d)**: Debug mode is diagnostic in nature and provides a more in-depth analysis of the communication with your devices. In this mode, the script not only listens for MQTT messages, but also prints out detailed information regarding the connection status with the MQTT broker and the content of incoming device messages. This mode is instrumental for identifying and rectifying communication issues. Upon completion of the debug session, a summary of the results is sent as a notification via a Telegram bot, giving you quick and convenient access to the debugging results. This can be especially useful for remote debugging or troubleshooting scenarios.
+
+The ability to switch between `check` and `debug` modes provides a versatile way of monitoring your devices. Whether you require regular operational checks or in-depth troubleshooting, `check_mqtt.py` ensures that your devices are communicating as expected and alerts you promptly if any issues arise. The test is considered successful as long as at least one message is received, regardless of the number of monitored topics, making it a robust solution for maintaining reliable device communication.
 
 ## Setup and Configuration
 
